@@ -1,0 +1,13 @@
+{
+  "id": "hellotalk",
+  "name": "HelloTalk",
+  "version": "1.0.0",
+  "description": "HelloTalk",
+  "main": "index.js",
+  "author": "Leonardo Melo <hello@leomeloxp.dev>",
+  "license": "MIT",
+  "config": {
+    "serviceURL": "https://web.hellotalk.com",
+    "hasNotificationSound": true
+  }
+}
