@@ -1,30 +1,32 @@
 "use strict";
 
-const {
-  remote
-} = require('electron');
+const { remote } = require("electron");
 
-const path = require('path');
+const path = require("path");
 
 const webContents = remote.getCurrentWebContents();
-const {
-  session
-} = webContents;
+const { session } = webContents;
 setTimeout(() => {
-  if (document.querySelector('body').innerHTML.includes('Google Chrome 36+')) {
+  if (document.querySelector("body").innerHTML.includes("Google Chrome 36+")) {
     window.location.reload();
   }
 }, 1000);
-window.addEventListener('beforeunload', async () => {
+window.addEventListener("beforeunload", async () => {
   try {
     session.flushStorageData();
     session.clearStorageData({
-      storages: ['appcache', 'serviceworkers', 'cachestorage', 'websql', 'indexdb']
+      storages: [
+        "appcache",
+        "serviceworkers",
+        "cachestorage",
+        "websql",
+        "indexdb"
+      ]
     });
     const registrations = await window.navigator.serviceWorker.getRegistrations();
     registrations.forEach(r => {
       r.unregister();
-      console.log('ServiceWorker unregistered');
+      console.log("ServiceWorker unregistered");
     });
   } catch (err) {
     console.err(err);
