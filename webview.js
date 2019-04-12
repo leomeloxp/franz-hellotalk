@@ -35,18 +35,16 @@ window.addEventListener("beforeunload", async () => {
 
 module.exports = Franz => {
   const getMessages = function getMessages() {
-    const elements = document.querySelectorAll('.CxUIE, .unread');
     let count = 0;
-
-    for (let i = 0; i < elements.length; i += 1) {
-      if (elements[i].querySelectorAll('*[data-icon="muted"]').length === 0) {
-        count += 1;
-      }
+    for (const [_, s] of document
+      .querySelectorAll(".userItem .newMsgCount span")
+      .entries()) {
+      count += parseInt(s.innerText, 10);
     }
 
     Franz.setBadge(count);
   };
 
-  Franz.injectCSS(path.join(__dirname, 'service.css'));
+  Franz.injectCSS(path.join(__dirname, "service.css"));
   Franz.loop(getMessages);
 };
